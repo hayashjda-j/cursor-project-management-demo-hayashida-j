@@ -1,0 +1,113 @@
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+    </marker>
+    <style>
+      .node { fill:#fff; stroke:#333; stroke-width:2; }
+      .node.cp { stroke-width:3; }
+      .edge { stroke:#333; stroke-width:2; fill:none; marker-end:url(#arrow); }
+      .edge.cp { stroke-width:3; }
+      .tbox { fill:#fff; stroke:#f5a623; stroke-width:1.5; rx:4; ry:4; }
+      .tboxText { fill:#f5a623; font:12px sans-serif; }
+      .edgeLabel { fill:#000; font:13px sans-serif; }
+      .nLabel { fill:#000; font:bold 14px sans-serif; dominant-baseline:middle; text-anchor:middle; }
+      .legend { fill:#000; font:12px sans-serif; }
+      .summary { fill:#000; font:13px sans-serif; font-weight:bold; }
+    </style>
+  </defs>
+  
+  <!-- 開始ノード -->
+  <circle class="node" cx="50" cy="250" r="18"/>
+  <text class="nLabel" x="50" y="250">Start</text>
+  <rect class="tbox" x="30" y="200" width="40" height="20"/>
+  <text class="tboxText" x="50" y="214" text-anchor="middle">0時間</text>
+  
+  <!-- タスクA完了ノード -->
+  <circle class="node" cx="200" cy="250" r="18"/>
+  <text class="nLabel" x="200" y="250">A</text>
+  <rect class="tbox" x="180" y="200" width="40" height="20"/>
+  <text class="tboxText" x="200" y="214" text-anchor="middle">1時間</text>
+  
+  <!-- タスクB完了ノード -->
+  <circle class="node" cx="350" cy="250" r="18"/>
+  <text class="nLabel" x="350" y="250">B</text>
+  <rect class="tbox" x="330" y="200" width="40" height="20"/>
+  <text class="tboxText" x="350" y="214" text-anchor="middle">1時間</text>
+  
+  <!-- タスクC完了ノード（クリティカルパス） -->
+  <circle class="node cp" cx="200" cy="150" r="18"/>
+  <text class="nLabel" x="200" y="150">C</text>
+  <rect class="tbox" x="180" y="100" width="40" height="20"/>
+  <text class="tboxText" x="200" y="114" text-anchor="middle">2時間</text>
+  
+  <!-- タスクD完了ノード -->
+  <circle class="node" cx="200" cy="350" r="18"/>
+  <text class="nLabel" x="200" y="350">D</text>
+  <rect class="tbox" x="180" y="300" width="40" height="20"/>
+  <text class="tboxText" x="200" y="314" text-anchor="middle">0.5時間</text>
+  
+  <!-- 集約ノード（B, C, D完了後） -->
+  <circle class="node cp" cx="500" cy="250" r="18"/>
+  <text class="nLabel" x="500" y="250">集約</text>
+  <rect class="tbox" x="480" y="200" width="40" height="20"/>
+  <text class="tboxText" x="500" y="214" text-anchor="middle">2時間</text>
+  
+  <!-- タスクE完了ノード（クリティカルパス） -->
+  <circle class="node cp" cx="650" cy="250" r="18"/>
+  <text class="nLabel" x="650" y="250">E</text>
+  <rect class="tbox" x="630" y="200" width="40" height="20"/>
+  <text class="tboxText" x="650" y="214" text-anchor="middle">2時間</text>
+  
+  <!-- タスクF完了ノード（クリティカルパス） -->
+  <circle class="node cp" cx="750" cy="250" r="18"/>
+  <text class="nLabel" x="750" y="250">F</text>
+  <rect class="tbox" x="730" y="200" width="40" height="20"/>
+  <text class="tboxText" x="750" y="214" text-anchor="middle">2時間</text>
+  
+  <!-- エッジ: Start → A -->
+  <path class="edge" d="M 68 250 L 182 250"/>
+  <text class="edgeLabel" x="125" y="245">1時間</text>
+  
+  <!-- エッジ: A → B -->
+  <path class="edge" d="M 218 250 L 332 250"/>
+  <text class="edgeLabel" x="275" y="245">0時間</text>
+  
+  <!-- エッジ: Start → C（クリティカルパス） -->
+  <path class="edge cp" d="M 68 250 L 68 150 L 182 150"/>
+  <text class="edgeLabel" x="100" y="195">2時間</text>
+  
+  <!-- エッジ: Start → D -->
+  <path class="edge" d="M 68 250 L 68 350 L 182 350"/>
+  <text class="edgeLabel" x="100" y="305">0.5時間</text>
+  
+  <!-- エッジ: B → 集約 -->
+  <path class="edge" d="M 368 250 L 482 250"/>
+  <text class="edgeLabel" x="425" y="245">0時間</text>
+  
+  <!-- エッジ: C → 集約（クリティカルパス） -->
+  <path class="edge cp" d="M 218 150 L 500 150 L 500 232"/>
+  <text class="edgeLabel" x="359" y="140">0時間</text>
+  
+  <!-- エッジ: D → 集約 -->
+  <path class="edge" d="M 218 350 L 500 350 L 500 268"/>
+  <text class="edgeLabel" x="359" y="360">0時間</text>
+  
+  <!-- エッジ: 集約 → E（クリティカルパス） -->
+  <path class="edge cp" d="M 518 250 L 632 250"/>
+  <text class="edgeLabel" x="575" y="245">0時間</text>
+  
+  <!-- エッジ: E → F（クリティカルパス） -->
+  <path class="edge cp" d="M 668 250 L 732 250"/>
+  <text class="edgeLabel" x="700" y="245">0時間</text>
+  
+  <!-- 凡例とサマリー -->
+  <text class="summary" x="50" y="420">最短完了: 2時間 / クリティカルパス: C → 集約 → E → F</text>
+  <text class="legend" x="50" y="445">A: 米炊き (1時間)</text>
+  <text class="legend" x="50" y="465">B: 料理酢混ぜ合わせ (0時間)</text>
+  <text class="legend" x="200" y="445">C: 魚を捌く（サーモン・いか）(2時間) - クリティカルパス</text>
+  <text class="legend" x="200" y="465">D: 野菜、卵の加工（きゅうり・ねぎ）(0.5時間)</text>
+  <text class="legend" x="450" y="445">E: 材料合わせ、パック詰め (0時間) - クリティカルパス</text>
+  <text class="legend" x="450" y="465">F: 個包装調味料添付 (0時間) - クリティカルパス</text>
+</svg>
+
